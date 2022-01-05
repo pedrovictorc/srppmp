@@ -1,0 +1,35 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+    <meta charset="UTF-8">
+    <title>Pregoeiro</title>
+    {% bootstrap_css %}
+</head>
+{% block content %}
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <a href="{% url 'index' %}"><button class="dropdown-item" type="button">Processos</button></a>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
+        </div>
+    </div>
+    <div class="container">
+      <h1>Pregoeiro</h1>
+        {% bootstrap_messages %}
+
+        <form action="{% url 'pregoeiro' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            {% endbuttons %}
+        </form>
+    </div>
+
+{% bootstrap_javascript jquery='full' %}
+{% endblock %}
+</html>

@@ -1,0 +1,25 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Pregão</title>
+    {% bootstrap_css %}
+</head>
+{% block content %}
+    <div class="container">
+      <h1>Novo Pregão</h1>
+        {% bootstrap_messages %}
+
+        <form action="{% url 'pregao' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            {% endbuttons %}
+        </form>
+    </div>
+
+{% bootstrap_javascript jquery='full' %}
+{%endblock%}
+</html>
