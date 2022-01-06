@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
 <body>
-        <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'processo' %}">Novo Processo</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listar</a>
@@ -21,29 +24,19 @@
               <a class="dropdown-item" href="{% url 'list_secretaria' %}">Secretarias</a>
               <a class="dropdown-item" href="{% url 'list_secretario' %}">Secretários</a>
               <a class="dropdown-item" href="{% url 'list_representante' %}">Representantes</a>
-              <a class="dropdown-item" href="{% url 'list_empresa' %}">Empresas</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cadastros</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'pregoeiro' %}">Pregoeiro</a>
+              <a class="dropdown-item" href="{% url 'representante' %}">Representante</a>
+              <a class="dropdown-item" href="{% url 'secretario' %}">Secretário</a>
+              <a class="dropdown-item" href="{% url 'secretaria' %}">Secretaria</a>
+              <a class="dropdown-item" href="{% url 'representante' %}">Representante</a>
+              <a class="dropdown-item" href="{% url 'empresa' %}">Empresa</a>
           </li>
         </ul>
 
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Listagem
-            </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="{% url 'index' %}"><button class="dropdown-item" type="button">Processos</button></a>
-                    <a href="{% url 'list_pregoeiro' %}"><button class="dropdown-item" type="button">Pregoeiros</button></a>
-                    <a href="{% url 'list_pregao' %}"><button class="dropdown-item" type="button">Pregoes</button></a>
-                </div>
-        </div>
         <div class="container">
             {% if empresas %}
            <h1>Processos</h1>
@@ -51,30 +44,22 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Contrato</th>
-                        <th scope="col">Pedido</th>
-                        <th scope="col">Processo</th>
-                        <th scope="col">Pregão</th>
-                        <th scope="col">Liberação</th>
-                        <th scope="col">Data da Liberação</th>
-                        <th scope="col">Empenho</th>
-                        <th scope="col">Valor</th>
-                        <th scope="col">Contratado</th>
+                        <th scope="col">Razão Social</th>
+                        <th scope="col">CNPJ</th>
+                        <th scope="col">Cidade - UF</th>
+                        <th scope="col">Contato</th>
+                        <th scope="col">Representante</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for processo in processos %}
+                    {% for empresa in empresas %}
                         <tr>
-                            <td scope="row">{{ processo.id }}</td>
-                            <td scope="row"> <a href="#modal{{ processo.id }}" data-toggle="modal""> {{ processo.n_contrato }} </a></td>
-                            <td scope="row">{{ processo.n_pedido }}</td>
-                            <td scope="row">{{ processo.n_processo }}</td>
-                            <td scope="row">{{ processo.pregao }}</td>
-                            <td scope="row">{{ processo.n_liberacao }}</td>
-                            <td scope="row">{{ processo.dt_liberaca }}</td>
-                            <td scope="row">{{ processo.empenho }}</td>
-                            <td scope="row">R$ {{ processo.valor }}</td>
-                            <td scope="row">{{ processo.contratado }}</td>
+                            <td scope="row">{{ empresa.id }}</td>
+                            <td scope="row"> <a href="#modal{{ empresa.id }}" data-toggle="modal"> {{ empresa.razao_social }} </a></td>
+                            <td scope="row">{{ empresa.cnpj }}</td>
+                            <td scope="row">{{ empresa.cidade }} - {{ empresa.estado }}</td>
+                            <td scope="row">{{ empresa.fone }}</td>
+                            <td scope="row">{{ empresa.representante }}</td>
                         </tr>
                         <div class="modal fade bd-example-modal-lg show" id="modal{{processo.id}}" role="dialog">
                             <div class="modal-dialog">

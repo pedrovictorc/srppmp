@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from .models import Representante, Pregao, Pregoeiro, Empresa, Secretaria, Secretario, Processo
 
 from .forms import PregoeiroModelForm, ProcessoModelForm, EmpresaModelForm, PregaoModelForm, SecretariaModelForm, \
-    SecretarioModelForm
+    SecretarioModelForm, RepresentanteModelForm
 from django.urls import reverse_lazy
 
 
@@ -137,6 +137,27 @@ def secretario(request):
         return redirect('index')
 
 
+def representante(request):
+    if str(request.user) != 'AnonymousUser':
+        if str(request.method) == 'POST':
+            form = RepresentanteModelForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Representante salvo com sucesso!')
+                form = RepresentanteModelForm()
+            else:
+                messages.error(request, 'Erro ao salvar Representante!')
+        else:
+            form = RepresentanteModelForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'representante.html', context)
+    else:
+        return redirect('index')
+
+
+
 def list_pregoeiro(request):
     context = {
         'pregoeiros': Pregoeiro.objects.all()
@@ -151,4 +172,30 @@ def list_pregao(request):
     return render(request, 'list_pregao.html', context)
 
 
+def list_secretaria(request):
+    context = {
+        'secretarias': Secretaria.objects.all()
+    }
+    return render(request, 'list_secretaria.html', context)
+
+
+def list_secretario(request):
+    context = {
+        'secretarios': Secretario.objects.all()
+    }
+    return render(request, 'list_secretario.html', context)
+
+
+def list_representante(request):
+    context = {
+        'representantes': Representante.objects.all()
+    }
+    return render(request, 'list_representante.html', context)
+
+
+def list_empresa(request):
+    context = {
+        'empresas': Empresa.objects.all()
+    }
+    return render(request, 'list_empresa.html', context)
 
