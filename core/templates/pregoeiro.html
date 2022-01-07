@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Pregoeiro</title>
     {% bootstrap_css %}
+    {% load crispy_forms_tags %}
 </head>
 {% block content %}
     <ul class="nav nav-tabs">
@@ -41,7 +42,7 @@
         <form action="{% url 'pregoeiro' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
 
-            {% bootstrap_form form %}
+            {{ form|crispy }}
 
             {% buttons %}
                 <button type="submit" class="btn btn-primary">Cadastrar</button>

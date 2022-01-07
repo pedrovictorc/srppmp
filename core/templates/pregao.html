@@ -43,6 +43,7 @@
         <form action="{% url 'pregao' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
+
             {% buttons %}
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             {% endbuttons %}
