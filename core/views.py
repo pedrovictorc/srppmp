@@ -199,3 +199,11 @@ def list_empresa(request):
     }
     return render(request, 'list_empresa.html', context)
 
+
+def gerar_contrato(request):
+    context ={
+
+    }
+    return render(request, 'gerar_contrato.html', context)
+
+

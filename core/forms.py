@@ -11,7 +11,8 @@ class PregoeiroModelForm(forms.ModelForm):
 class RepresentanteModelForm(forms.ModelForm):
     class Meta:
         model = Representante
-        fields = ['cpf', 'nome', 'comple_name', 'rg', 'cep', 'logradouro', 'complemento', 'bairro' ,'numero' ,'estado' ,'cidade' ,'fone']
+        fields = '__all__'
+        exclude = ['ativo']
 
 
 class EmpresaModelForm(forms.ModelForm):

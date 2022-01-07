@@ -40,7 +40,7 @@
 
         <form action="{% url 'processo' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
-            {% bootstrap_form form %}
+            {% bootstrap_form form layout='horizontal'%}
             {% buttons %}
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             {% endbuttons %}
